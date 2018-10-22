@@ -3,7 +3,7 @@
 $curl = curl_init();
 $id = $_GET['id'];
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "http://pro.rajaongkir.com/api/city?province=$id",
+  CURLOPT_URL => "https://api.rajaongkir.com/starter/city?province=$id",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -11,7 +11,7 @@ curl_setopt_array($curl, array(
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "GET",
   CURLOPT_HTTPHEADER => array(
-    "key: api-key"
+    "key: 8e1002008be8c6652e5fc397d8043ce3"
   ),
 ));
 

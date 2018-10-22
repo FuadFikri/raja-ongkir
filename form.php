@@ -3,7 +3,7 @@
 	$curl = curl_init();
 
 	curl_setopt_array($curl, array(
-	  CURLOPT_URL => "http://pro.rajaongkir.com/api/province",
+	  CURLOPT_URL => "https://api.rajaongkir.com/starter/province",
 	  CURLOPT_RETURNTRANSFER => true,
 	  CURLOPT_ENCODING => "",
 	  CURLOPT_MAXREDIRS => 10,
@@ -11,7 +11,7 @@
 	  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 	  CURLOPT_CUSTOMREQUEST => "GET",
 	  CURLOPT_HTTPHEADER => array(
-		"key: api-key"
+		"key: 8e1002008be8c6652e5fc397d8043ce3"
 	  ),
 	));
 
@@ -26,7 +26,7 @@
 	  echo $response;
 	} */
 	$response = json_decode($response)->rajaongkir->results;
-	//print_r($response);
+	// print_r($response);
 ?>
 <html>
 	<body>
@@ -50,8 +50,25 @@
 				<select name="kabupaten" id="select_kabupaten">
 				</select>
 			</div>
+			<div id="courier">
+				Courier
+				<select name="courier" id="select_courier">
+					<option value="jne">JNE</option>
+					<option value="pos">POS</option>
+					<option value="TIK">TIKI</option>
+				</select>
+			</div>
+
+			<div id="berat">
+				berat
+				<input type="number" name="berat" id="berat">
+			</div>
+
+					<div id="submit">
+						<input type="submit" value="" name="submit" id="submit">
+					</div>
 		</form>
-		<script src="jquery-3.3.1.min.js"></script>
+		<script src="jquery-3.3.1.js"></script>
 		<script>
 			$('#kabupaten').hide();
 			$('#select_provinsi').on('change', function() {
@@ -61,7 +78,7 @@
 					$('#select_kabupaten').find('option').remove().end();
 					$.ajax({
 						type: 'GET', 
-						url: 'http://localhost/city.php', 
+						url: 'http://localhost/rajaongkir/city.php', 
 						data: { id: id }, 
 						dataType: 'json',
 						success: function (data) { 
@@ -71,11 +88,18 @@
 									.text(value.type+' '+value.city_name)); 
 							});
 							console.log(data);
+							$('#select_kabupaten').change();
 						}
 					});
 				}else{
 					$('#kabupaten').hide();
+					$('#courier').hide();
 				}
+			});
+
+			$('select_kabupaten').on('change',function(){
+				var id = this.value;
+				$('#courier').show();
 			});
 		</script>
 	</body>
