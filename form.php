@@ -55,18 +55,21 @@
 				<select name="courier" id="select_courier">
 					<option value="jne">JNE</option>
 					<option value="pos">POS</option>
-					<option value="TIK">TIKI</option>
+					<option value="tiki">TIKI</option>
 				</select>
-			</div>
 
-			<div id="berat">
+				<br>
 				berat
 				<input type="number" name="berat" id="berat">
 			</div>
 
-					<div id="submit">
-						<input type="submit" value="" name="submit" id="submit">
-					</div>
+			
+				
+			
+
+					
+						<input type="submit" value="submit" name="submit" id="submit">
+					
 		</form>
 		<script src="jquery-3.3.1.js"></script>
 		<script>
@@ -100,6 +103,24 @@
 			$('select_kabupaten').on('change',function(){
 				var id = this.value;
 				$('#courier').show();
+			});
+
+			$('form').on('submit', function(){
+				var city = $('#select_kabupaten').find(':selected').val();
+				var courier = $('#select_courier').find(':selected').val();
+				var weight = $('#berat').val();
+				$.ajax({
+					type: 'GET',
+					url: 'http://localhost/rajaongkir/cost.php',
+					data: {destination:city,  weight:weight,courier:courier},
+					dataType: 'json',
+					success: function(data){
+
+						console.log(data);
+						
+					}
+				});
+				return false;
 			});
 		</script>
 	</body>
